@@ -7,8 +7,11 @@ local opts = { noremap = true, silent = true }
 -- select all,
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
+-- Jumplist
+keymap.set("n", "<C-m>", "<C-i>", opts)
+
 -- New tab
-keymap.set("n", "te", ":tabedit<cr>")
+keymap.set("n", "ta", ":tabedit<cr>")
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 
@@ -26,9 +29,24 @@ keymap.set("n", "sl", "<C-w>l")
 
 -- Maps save to ctrl + s and insert
 keymap.set("n", "<C-s>", "<Esc>:update<cr>gi")
-keymap.set("n", "<C-x>", "<esc>:wq!<cr>")
+keymap.set("n", "<C-s>", "<esc>:wq!<cr>")
 keymap.set("n", "<C-n>", "<esc>:qa!<cr>")
 
 -- Map end of line to Cltr+e plus edit mode
 -- keymap.set("n", "<C-e>", "<esc>$i<right>")
 keymap.set("n", "<C-e>", "<esc>$<right>")
+
+-- Moving text
+-- Move text up and down
+keymap.set("n", "<C-Down>", "<Esc>:m .+1<CR>", opts)
+keymap.set("n", "<C-Up>", "<Esc>:m .-2<CR>", opts)
+keymap.set("v", "<C-Down>", ":m .+1<CR>", opts)
+keymap.set("v", "<C-Up>", ":m .-2<CR>", opts)
+keymap.set("x", "<C-Down>", ":move '>+1<CR>gv-gv", opts)
+keymap.set("x", "<C-Up>", ":move '<-2<CR>gv-gv", opts)
+
+-- Pick a buffer
+keymap.set("n", "<Leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", {})
+keymap.set("n", "<Leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", {})
+keymap.set("n", "<Leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", {})
+keymap.set("n", "<Leader>9", "<Cmd>BufferLineGoToBuffer -1<CR>", {})
