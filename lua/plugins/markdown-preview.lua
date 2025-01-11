@@ -7,13 +7,13 @@ return {
     keys = {
       {
         -- cmd and cr to execute command
-        "<leader>uk",
+        "<leader>k",
         "<cmd>MarkdownPreviewToggle<CR>",
         desc = "Toggle markdown preview",
       },
       {
 
-        "<leader>uK",
+        "<leader>k",
         "<cmd>MarkdownPreviewStop<CR>",
         desc = "Toggle markdown stop",
       },

@@ -3,7 +3,7 @@ return {
     "folke/tokyonight.nvim",
     lazy = true,
     opts = {
-      style = "night",
+      style = "storm",
       transparent = true,
       styles = {
         sidebars = "dark",
@@ -59,8 +59,14 @@ return {
     opts = {
       options = {
         always_show_bufferline = true,
-        show_buffer_close_icons = false,
+        show_buffer_close_icons = true,
         show_close_icon = false,
+        -- customizing
+        show_tab_indicators = true,
+        show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
+        duplicates_across_groups = true, -- whether to consider duplicate paths in different groups as duplicates
+        persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+        move_wraps_at_ends = false, -- whether or not the move command "wraps" at the first or last position
       },
     },
   },

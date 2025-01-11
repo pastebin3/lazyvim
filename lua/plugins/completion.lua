@@ -7,7 +7,7 @@ return {
     },
     signature = { window = { border = "rounded" } },
     keymap = {
-      ["<C-s>"] = {
+      ["<C-t>"] = {
         function(cmp)
           cmp.show({ providers = { "snippets" } })
         end,

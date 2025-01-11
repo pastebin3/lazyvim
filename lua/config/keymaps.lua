@@ -1,45 +1,51 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+-- keymaps are automatically loaded on the verylazy event
+-- default keymaps that are always set: https://github.com/lazyvim/lazyvim/blob/main/lua/lazyvim/config/keymaps.lua
+-- add any additional keymaps here
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 -- select all,
-keymap.set("n", "<C-a>", "gg<S-v>G")
+keymap.set("n", "<c-a>", "gg<s-v>g")
 
--- Jumplist
-keymap.set("n", "<C-m>", "<C-i>", opts)
+keymap.set("n", "<leader>t", "<esc>:terminal<cr>")
+-- jumplist
+keymap.set("n", "<c-m>", "<c-i>", opts)
 
--- New tab
+-- new tab
 keymap.set("n", "ta", ":tabedit<cr>")
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
+keymap.set("n", "<tab>", ":tabnext<return>", opts)
+keymap.set("n", "<s-tab>", ":tabprev<return>", opts)
 
--- Split window
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
+-- split window
+keymap.set("n", "ss", ":split<return>", opts)
+keymap.set("n", "sv", ":vsplit<return>", opts)
 -- close split window
-keymap.set("n", "sq", "<Esc>:q<cr>")
+keymap.set("n", "sq", "<esc>:q<cr>")
 
--- Navigate split windows
-keymap.set("n", "sh", "<C-w>h")
-keymap.set("n", "sk", "<C-w>k")
-keymap.set("n", "sj", "<C-w>j")
-keymap.set("n", "sl", "<C-w>l")
+-- navigate split windows
+keymap.set("n", "sh", "<c-w>h")
+keymap.set("n", "sk", "<c-w>k")
+keymap.set("n", "sj", "<c-w>j")
+keymap.set("n", "sl", "<c-w>l")
 
--- Maps save to ctrl + s and insert
-keymap.set("n", "<C-s>", "<Esc>:update<cr>gi")
-keymap.set("n", "<C-s>", "<esc>:wq!<cr>")
-keymap.set("n", "<C-q>", "<esc>:qa!<cr>")
+-- Resize window using <ctrl> arrow keys
+keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
--- Map end of line to Cltr+e plus edit mode
--- keymap.set("n", "<C-e>", "<esc>$i<right>")
-keymap.set("n", "<C-e>", "<esc>$<right>")
+-- maps save to ctrl + s and insert
+-- keymap.set("n", "<c-s", ":update<cr>gi")
+keymap.set({ "i", "x", "n", "s" }, "<c-s>", "<esc>:wq!<cr>")
+keymap.set({ "i", "x", "n", "s" }, "<c-q>", "<esc>:<qa!<cr>")
 
--- Move text up and down
-keymap.set("n", "<C-Up>", "<Esc>:m .-2<CR>", opts)
-keymap.set("n", "<C-Down>", "<Esc>:m .+1<CR>", opts)
-keymap.set("v", "<C-Down>", ":m .+1<CR>", opts)
-keymap.set("v", "<C-Up>", ":m .-2<CR>", opts)
+-- map end of line to cltr+e plus edit mode
+keymap.set("n", "<c-e>", "<esc>$<right>")
+
+-- move text up and down
+keymap.set("n", "<c-up>", ":m .-2<cr>", opts)
+keymap.set("n", "<c-down>", ":m .+1<cr>", opts)
+keymap.set("v", "<c-down>", ":m .+1<cr>", opts)
+keymap.set("v", "<c-up>", ":m .-2<cr>", opts)
 keymap.set("x", "<C-Down>", ":move '>+1<CR>gv-gv", opts)
 keymap.set("x", "<C-Up>", ":move '<-2<CR>gv-gv", opts)
