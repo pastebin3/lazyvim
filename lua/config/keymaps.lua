@@ -4,10 +4,16 @@
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
--- select all,
-keymap.set("n", "<c-a>", "gg<s-v>g")
 
-keymap.set("n", "<leader>t", "<esc>:terminal<cr>")
+-- select all,
+keymap.set("n", "<C-a>", "gg<S-v>G")
+
+-- changing in word
+keymap.set("n", "cw", "ciw")
+
+-- change word with yanked cltr+ j
+keymap.set("n", "<C-j>", "cw<C-r>0<ESC>")
+
 -- jumplist
 keymap.set("n", "<c-m>", "<c-i>", opts)
 
@@ -19,6 +25,7 @@ keymap.set("n", "<s-tab>", ":tabprev<return>", opts)
 -- split window
 keymap.set("n", "ss", ":split<return>", opts)
 keymap.set("n", "sv", ":vsplit<return>", opts)
+
 -- close split window
 keymap.set("n", "sq", "<esc>:q<cr>")
 
@@ -37,7 +44,7 @@ keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase W
 -- maps save to ctrl + s and insert
 -- keymap.set("n", "<c-s", ":update<cr>gi")
 keymap.set({ "i", "x", "n", "s" }, "<c-s>", "<esc>:wq!<cr>")
-keymap.set({ "i", "x", "n", "s" }, "<c-q>", "<esc>:<qa!<cr>")
+keymap.set({ "i", "x", "n", "s" }, "<c-q>", "<esc>:qa!<cr>")
 
 -- map end of line to cltr+e plus edit mode
 keymap.set("n", "<c-e>", "<esc>$<right>")
@@ -49,3 +56,6 @@ keymap.set("v", "<c-down>", ":m .+1<cr>", opts)
 keymap.set("v", "<c-up>", ":m .-2<cr>", opts)
 keymap.set("x", "<C-Down>", ":move '>+1<CR>gv-gv", opts)
 keymap.set("x", "<C-Up>", ":move '<-2<CR>gv-gv", opts)
+
+-- Delete all buffers but the current one --
+keymap.set("n", "<leader>bq", '<Esc>:%bdelete|edit #|normal`"<cr>')
