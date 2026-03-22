@@ -4,7 +4,8 @@
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
-
+-- markdown render toggle
+keymap.set("n", "<leader>m", ":RenderMarkdown toggle<CR>", { desc = "Toggle Markdown render" })
 -- select all,
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
