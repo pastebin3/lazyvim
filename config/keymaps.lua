@@ -9,8 +9,22 @@ keymap.set("n", "<leader>m", ":RenderMarkdown toggle<CR>", { desc = "Toggle Mark
 -- select all,
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
--- changing in word
+-- whichkey leader ?
+keymap.set("n", "<leader>?", ":WhichKey<CR>", { desc = "Open WhichKey" })
+
+-- toggle terminal
+keymap.set("n", "<leader>tt", ":Terminal<CR>", { desc = "Toggle terminal" })
+
+-- visual block
+keymap.set("n", "<leader>v", "<C-v>", { desc = "Visual Block" })
+
+-- Change word regardless of cursor position
 keymap.set("n", "cw", "ciw")
+keymap.set("n", "cW", "ciW") -- For WORDs (includes punctuation)
+
+-- delete word regardless of cursor position
+keymap.set("n", "dw", "diw")
+keymap.set("n", "dW", "diW") -- For WORDs (includes punctuation)
 
 -- change word with yanked cltr+ j
 keymap.set("n", "<C-j>", "cw<C-r>0<ESC>")
@@ -18,10 +32,14 @@ keymap.set("n", "<C-j>", "cw<C-r>0<ESC>")
 -- jumplist
 keymap.set("n", "<c-m>", "<c-i>", opts)
 
--- new tab
-keymap.set("n", "ta", ":tabedit<cr>")
-keymap.set("n", "<tab>", ":tabnext<return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<return>", opts)
+-- buffers
+keymap.set("n", "ta", "<cmd>enew<cr>", opts) -- new buffer
+keymap.set("n", "<Tab>", "<cmd>bnext<cr>", opts) -- next buffer
+keymap.set("n", "<S-Tab>", "<cmd>bprev<cr>", opts) -- previous buffer
+keymap.set("n", "tq", "<cmd>bd<cr>", opts) -- close buffer
+
+-- close tab
+keymap.set("n", "tq", ":tabclose<CR>", opts)
 
 -- split window
 keymap.set("n", "ss", ":split<return>", opts)
@@ -42,8 +60,7 @@ keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Heig
 keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
--- maps save to ctrl + s and insert
--- keymap.set("n", "<c-s", ":update<cr>gi")
+-- quick quit ctrl + s/q
 keymap.set({ "i", "x", "n", "s" }, "<c-s>", "<esc>:wq!<cr>")
 keymap.set({ "i", "x", "n", "s" }, "<c-q>", "<esc>:qa!<cr>")
 
