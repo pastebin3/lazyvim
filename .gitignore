@@ -1,9 +1,23 @@
-tt.*
-.tests
-doc/tags
-debug
-.repro
-foo.*
-*.log
-data
-lazy-lock.json
+# OS / editor junk
+.DS_Store
+Thumbs.db
+
+# Temporary / swap files
+*.swp
+*.swo
+*~
+
+# Neovim generated files
+shada/
+view/
+session/
+spell/
+backup/
+swap/
+
+# Plugin/tool caches
+lazy-lock.json.tmp
+
+# Secrets / local environment
+.env
+.env.*
