@@ -1,79 +1,211 @@
--- keymaps are automatically loaded on the verylazy event
--- default keymaps that are always set: https://github.com/lazyvim/lazyvim/blob/main/lua/lazyvim/config/keymaps.lua
+```lua
+-- keymaps are automatically loaded on the VeryLazy event
+-- default keymaps that are always set:
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- add any additional keymaps here
 
 local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
--- markdown render toggle
-keymap.set("n", "<leader>m", ":RenderMarkdown toggle<CR>", { desc = "Toggle Markdown render" })
--- select all,
-keymap.set("n", "<C-a>", "gg<S-v>G")
 
--- whichkey leader ?
-keymap.set("n", "<leader>?", ":WhichKey<CR>", { desc = "Open WhichKey" })
+-- ============================================================================
+-- General
+-- ============================================================================
 
--- toggle terminal
-keymap.set("n", "<leader>tt", ":Terminal<CR>", { desc = "Toggle terminal" })
+-- Markdown render toggle
+keymap.set("n", "<leader>m", "<cmd>RenderMarkdown toggle<cr>", {
+  desc = "Toggle Markdown render",
+})
 
--- visual block
-keymap.set("n", "<leader>v", "<C-v>", { desc = "Visual Block" })
+-- Select all
+keymap.set("n", "<C-a>", "ggVG", {
+  desc = "Select all",
+})
+
+-- WhichKey
+keymap.set("n", "<leader>?", "<cmd>WhichKey<cr>", {
+  desc = "Open WhichKey",
+})
+
+-- Terminal
+keymap.set("n", "<leader>tt", "<cmd>terminal<cr>", {
+  desc = "Open terminal",
+})
+
+-- Visual block
+keymap.set("n", "<leader>v", "<C-v>", {
+  desc = "Visual block",
+})
+
+
+-- ============================================================================
+-- Editing
+-- ============================================================================
 
 -- Change word regardless of cursor position
 keymap.set("n", "cw", "ciw")
-keymap.set("n", "cW", "ciW") -- For WORDs (includes punctuation)
+keymap.set("n", "cW", "ciW")
 
--- delete word regardless of cursor position
+-- Delete word regardless of cursor position
 keymap.set("n", "dw", "diw")
-keymap.set("n", "dW", "diW") -- For WORDs (includes punctuation)
+keymap.set("n", "dW", "diW")
 
--- change word with yanked cltr+ j
-keymap.set("n", "<C-j>", "cw<C-r>0<ESC>")
+-- Replace current word with yanked text
+keymap.set("n", "<C-j>", "cw<C-r>0<esc>", {
+  desc = "Replace word with yank",
+})
 
--- jumplist
-keymap.set("n", "<c-m>", "<c-i>", opts)
+-- Go to end of line and start editing
+keymap.set("n", "<C-e>", "$a", {
+  desc = "Edit at end of line",
+})
 
--- buffers
-keymap.set("n", "ta", "<cmd>enew<cr>", opts) -- new buffer
-keymap.set("n", "<Tab>", "<cmd>bnext<cr>", opts) -- next buffer
-keymap.set("n", "<S-Tab>", "<cmd>bprev<cr>", opts) -- previous buffer
-keymap.set("n", "tq", "<cmd>bd<cr>", opts) -- close buffer
 
--- close tab
-keymap.set("n", "tq", ":tabclose<CR>", opts)
+-- ============================================================================
+-- Navigation
+-- ============================================================================
 
--- split window
-keymap.set("n", "ss", ":split<return>", opts)
-keymap.set("n", "sv", ":vsplit<return>", opts)
+-- Jumplist
+keymap.set("n", "<C-m>", "<C-i>", {
+  noremap = true,
+  silent = true,
+  desc = "Jump forward",
+})
 
--- close split window
-keymap.set("n", "sq", "<esc>:q<cr>")
 
--- navigate split windows
-keymap.set("n", "sh", "<c-w>h")
-keymap.set("n", "sk", "<c-w>k")
-keymap.set("n", "sj", "<c-w>j")
-keymap.set("n", "sl", "<c-w>l")
+-- ============================================================================
+-- Buffers
+-- ============================================================================
 
--- Resize window using <ctrl> arrow keys
-keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+-- New buffer
+keymap.set("n", "ta", "<cmd>enew<cr>", {
+  desc = "New buffer",
+})
 
--- quick quit ctrl + s/q
-keymap.set({ "i", "x", "n", "s" }, "<c-s>", "<esc>:wq!<cr>")
-keymap.set({ "i", "x", "n", "s" }, "<c-q>", "<esc>:qa!<cr>")
+-- Next / previous buffer
+keymap.set("n", "<Tab>", "<cmd>bnext<cr>", {
+  desc = "Next buffer",
+})
 
--- map end of line to cltr+e plus edit mode
-keymap.set("n", "<c-e>", "<esc>$<right>")
+keymap.set("n", "<S-Tab>", "<cmd>bprev<cr>", {
+  desc = "Previous buffer",
+})
 
--- move text up and down
-keymap.set("n", "<c-up>", ":m .-2<cr>", opts)
-keymap.set("n", "<c-down>", ":m .+1<cr>", opts)
-keymap.set("v", "<c-down>", ":m .+1<cr>", opts)
-keymap.set("v", "<c-up>", ":m .-2<cr>", opts)
-keymap.set("x", "<C-Down>", ":move '>+1<CR>gv-gv", opts)
-keymap.set("x", "<C-Up>", ":move '<-2<CR>gv-gv", opts)
+-- Close current buffer
+keymap.set("n", "tq", "<cmd>bd<cr>", {
+  desc = "Close buffer",
+})
 
--- Delete all buffers but the current one --
-keymap.set("n", "<leader>bq", '<Esc>:%bdelete|edit #|normal`"<cr>')
+-- Delete all buffers except current
+keymap.set("n", "<leader>bq", '<cmd>%bdelete|edit #|normal `"<cr>', {
+  desc = "Delete other buffers",
+})
+
+-- Delete all buffers except current, keeping current buffer
+keymap.set("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>", {
+  desc = "Delete other buffers",
+})
+
+
+-- ============================================================================
+-- Splits
+-- ============================================================================
+
+-- Create horizontal / vertical split
+keymap.set("n", "ss", "<cmd>split<cr>", {
+  desc = "Horizontal split",
+})
+
+keymap.set("n", "sv", "<cmd>vsplit<cr>", {
+  desc = "Vertical split",
+})
+
+-- Close current split
+keymap.set("n", "sq", "<cmd>close<cr>", {
+  desc = "Close split",
+})
+
+-- Navigate between splits
+keymap.set("n", "sh", "<C-w>h", {
+  desc = "Go to left window",
+})
+
+keymap.set("n", "sk", "<C-w>k", {
+  desc = "Go to upper window",
+})
+
+keymap.set("n", "sj", "<C-w>j", {
+  desc = "Go to lower window",
+})
+
+keymap.set("n", "sl", "<C-w>l", {
+  desc = "Go to right window",
+})
+
+
+-- ============================================================================
+-- Window resizing
+-- ============================================================================
+
+keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", {
+  desc = "Increase window height",
+})
+
+keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", {
+  desc = "Decrease window height",
+})
+
+keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", {
+  desc = "Decrease window width",
+})
+
+keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", {
+  desc = "Increase window width",
+})
+
+
+-- ============================================================================
+-- Move lines
+-- ============================================================================
+
+-- Normal mode
+keymap.set("n", "<A-Up>", "<cmd>move .-2<cr>==", {
+  desc = "Move line up",
+})
+
+keymap.set("n", "<A-Down>", "<cmd>move .+1<cr>==", {
+  desc = "Move line down",
+})
+
+-- Visual mode
+keymap.set("v", "<A-Up>", "<cmd>move '<-2<cr>gv=gv", {
+  desc = "Move selection up",
+})
+
+keymap.set("v", "<A-Down>", "<cmd>move '>+1<cr>gv=gv", {
+  desc = "Move selection down",
+})
+
+
+-- ============================================================================
+-- Save / Quit
+-- ============================================================================
+
+-- Save
+keymap.set({ "i", "n", "v", "s" }, "<C-s>", "<cmd>w<cr>", {
+  desc = "Save file",
+})
+
+-- Quit Neovim
+keymap.set("n", "<C-q>", "<cmd>qa<cr>", {
+  desc = "Quit Neovim",
+})
+
+
+-- ============================================================================
+-- Notes
+-- ============================================================================
+
+-- Keep the mappings below intentional and unique.
+-- Avoid defining the same key twice because the later mapping overwrites
+-- the earlier one.
+```
+
