@@ -1,4 +1,3 @@
-```lua
 -- keymaps are automatically loaded on the VeryLazy event
 -- default keymaps that are always set:
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
@@ -35,7 +34,6 @@ keymap.set("n", "<leader>v", "<C-v>", {
   desc = "Visual block",
 })
 
-
 -- ============================================================================
 -- Editing
 -- ============================================================================
@@ -58,7 +56,6 @@ keymap.set("n", "<C-e>", "$a", {
   desc = "Edit at end of line",
 })
 
-
 -- ============================================================================
 -- Navigation
 -- ============================================================================
@@ -69,7 +66,6 @@ keymap.set("n", "<C-m>", "<C-i>", {
   silent = true,
   desc = "Jump forward",
 })
-
 
 -- ============================================================================
 -- Buffers
@@ -103,7 +99,6 @@ keymap.set("n", "<leader>bq", '<cmd>%bdelete|edit #|normal `"<cr>', {
 keymap.set("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>", {
   desc = "Delete other buffers",
 })
-
 
 -- ============================================================================
 -- Splits
@@ -140,7 +135,6 @@ keymap.set("n", "sl", "<C-w>l", {
   desc = "Go to right window",
 })
 
-
 -- ============================================================================
 -- Window resizing
 -- ============================================================================
@@ -160,7 +154,6 @@ keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", {
 keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", {
   desc = "Increase window width",
 })
-
 
 -- ============================================================================
 -- Move lines
@@ -184,7 +177,6 @@ keymap.set("v", "<A-Down>", "<cmd>move '>+1<cr>gv=gv", {
   desc = "Move selection down",
 })
 
-
 -- ============================================================================
 -- Save / Quit
 -- ============================================================================
@@ -199,7 +191,6 @@ keymap.set("n", "<C-q>", "<cmd>qa<cr>", {
   desc = "Quit Neovim",
 })
 
-
 -- ============================================================================
 -- Notes
 -- ============================================================================
@@ -207,5 +198,3 @@ keymap.set("n", "<C-q>", "<cmd>qa<cr>", {
 -- Keep the mappings below intentional and unique.
 -- Avoid defining the same key twice because the later mapping overwrites
 -- the earlier one.
-```
-
